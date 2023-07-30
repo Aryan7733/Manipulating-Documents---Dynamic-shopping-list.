@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shopping List Example</title>
+    <style>
+      .shopping-item {
+        margin-bottom: 10px;
+      }
+
+      .delete-button {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My Shopping List</h1>
+
+    <div>
+      <label for="newItem">Enter a new item:</label>
+      <input type="text" id="newItem">
+      <button id="addItemButton">Add Item</button>
+    </div>
+
+    <ul id="shoppingList">
+
+    </ul>
+
+    <script>
+      const shoppingList = document.getElementById('shoppingList');
+      const input = document.getElementById('newItem');
+      const addButton = document.getElementById('addItemButton');
+
+      addButton.addEventListener('click', () => {
+        const newItemValue = input.value;
+        input.value = '';
+
+        const listItem = document.createElement('li');
+        const itemText = document.createElement('span');
+        const deleteButton = document.createElement('button');
+
+        listItem.classList.add('shopping-item');
+
+        listItem.appendChild(itemText);
+        itemText.textContent = newItemValue;
+        listItem.appendChild(deleteButton);
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-button');
+        deleteButton.addEventListener('click', () => {
+          listItem.remove();
+        });
+
+        shoppingList.appendChild(listItem);
+
+        input.focus();
+      });
+    </script>
+  </body>
+</html>
